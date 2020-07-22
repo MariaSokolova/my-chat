@@ -17,7 +17,6 @@ class Join extends Component {
   setNameHandler(name) {
     this.props.changeName(name);
     localStorage.setItem('from', name);
-    console.log('name', name)
   };
 
   render() {

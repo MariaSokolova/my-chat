@@ -5,7 +5,6 @@ import DisconnectButton from "../DisconnectButton/DisconnectButton";
 import './Header.css'
 
 const Header = (props) => {
-  console.log('header props', props);
   return (
     <div className="header">
       <p className='header-name'>{props.name}</p>
