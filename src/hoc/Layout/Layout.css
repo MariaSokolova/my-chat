@@ -1,0 +1,18 @@
+.layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(90deg, #70a955 0%, #2e4528 100%);
+    justify-content: center;
+    align-items: center;
+
+}
+
+.layout main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+}

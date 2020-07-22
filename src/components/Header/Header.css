@@ -1,0 +1,20 @@
+.header {
+background: #ba8f12;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+}
+
+
+.header-name {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 3rem;
+    color: #ffffff;
+    padding-left: 1rem;
+}
+
+.header-button{
+    margin: 1rem;
+}

@@ -1,0 +1,53 @@
+.message-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.message-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-name {
+    margin: 0 0 5px 0;
+    color: #777777;
+    font-size: 1rem;
+}
+
+.message-text {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    margin-bottom: .5rem;
+    width: 70%;
+    padding: .5rem;
+}
+
+.message-time {
+    font-size: .8rem;
+    color: #777777;
+}
+
+.you-message .message-content {
+    align-items: flex-end;
+    padding-right: 1rem;
+}
+
+.you-message .message-text {
+    background: #5c914c;
+    color: #ffffff;
+    border: 1px solid #5c914c;
+    border-radius: 1.3rem 1.3rem 0 1.3rem;
+}
+
+.other-message .message-content {
+    padding-left: 1rem;
+}
+
+.other-message .message-text {
+    background: #ddf0c8;
+    color: #404040;
+    border: 1px solid #699f59;
+    border-radius: 1.3rem 1.3rem 1.3rem 0;
+}
+
