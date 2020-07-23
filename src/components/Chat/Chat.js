@@ -60,7 +60,6 @@ class Chat extends Component {
 
     this.socket.onmessage = (event) => {
       const newMessages = JSON.parse(event.data);
-      console.log('newMessages', newMessages);
 
       if (!this.state.windowIsActive && newMessages.length !== 0) {
         this.showNotification(newMessages[0].from, { body: newMessages[0].message });
