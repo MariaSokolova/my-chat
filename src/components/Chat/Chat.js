@@ -101,7 +101,7 @@ class Chat extends Component {
         this.setState({
           showErrorMessage: true
         });
-        setTimeout(() => restartWebSocket(), 8000)
+        setTimeout(() => restartWebSocket(), 20000)
       }
     };
     this.socket.onerror = function (error) {
