@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Input from "../Input/Input";
 import MessageList from "../MessageList/MessageList";
 import Header from "../Header/Header";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import {setSocket} from "../../redux/actions";
 
 import "./Chat.css"
@@ -15,7 +16,8 @@ class Chat extends Component {
     this.state = {
       messages: this.messagesFormStorage || [],
       isOnline: false,
-      windowIsActive: true
+      windowIsActive: true,
+      showErrorMessage: false
     };
   }
 
@@ -49,6 +51,9 @@ class Chat extends Component {
         this.socket.close();
       }
       this.startWebSocket();
+      this.setState({
+        showErrorMessage: false
+      });
       console.log('server restarted')
     };
 
@@ -86,13 +91,16 @@ class Chat extends Component {
       this.props.setSocket(this.socket);
     };
 
-    this.socket.onclose = function (event) {
+    this.socket.onclose =  (event) => {
       if (event.wasClean) {
         console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
       } else {
         // e.g. server process killed or network down
         // event.code is usually 1006 in this case
         console.log('[close] Connection died');
+        this.setState({
+          showErrorMessage: true
+        });
         setTimeout(() => restartWebSocket(), 8000)
       }
     };
@@ -126,10 +134,14 @@ class Chat extends Component {
   }
 
   render() {
+    const showErrorMessage = this.state.showErrorMessage;
     return (
       <div className='chat'>
         <Header/>
         <MessageList messages={this.state.messages}/>
+        {showErrorMessage
+        ? <ErrorMessage />
+        : null}
         <Input />
       </div>
     )
