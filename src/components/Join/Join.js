@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {Textbox} from "react-inputs-validation";
+
 
 import {setName} from "../../redux/actions";
 import "./Join.css";
@@ -23,9 +25,27 @@ class Join extends Component {
     return (
       <div className="join">
         <h1>Join</h1>
-        <input placeholder="Name" type="text"
-               value={this.props.name}
-               onChange={(e) => this.setNameHandler(e.target.value)}/>
+        <Textbox
+          attributesInput={{ // Optional.
+            id: 'Name',
+            name: 'Name',
+            type: 'text',
+            placeholder: 'Place your name here...',
+          }}
+          value={this.props.name} // Optional.[String].Default: "".
+          onChange={(name) => {
+            this.setNameHandler(name);
+          }}
+          onFocus={true}
+          onBlur={(e) => {
+            console.log(e)
+          }} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
+          validationOption={{
+            name: 'Name',
+            check: true,
+            required: true
+          }}
+        />
         <Link onClick={this.singInHandler} to={'/chat'}>
           <button type="submit">Sign In</button>
         </Link>
