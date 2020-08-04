@@ -9,6 +9,8 @@ import {setSocket} from "../../redux/actions";
 
 import "./Chat.css"
 
+const restartInterval = 10;
+
 class Chat extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class Chat extends Component {
       isOnline: false,
       windowIsActive: true,
       showErrorMessage: false,
-      count: 20
+      count: restartInterval
     };
   }
 
@@ -55,7 +57,11 @@ class Chat extends Component {
       this.setState({
         showErrorMessage: false
       });
-      console.log('server restarted')
+      console.log('server restarted');
+      clearInterval(this.myInterval);
+      this.setState({
+        count: restartInterval
+      })
     };
 
     this.socket = new WebSocket("ws://chat.shas.tel");
@@ -88,7 +94,6 @@ class Chat extends Component {
           }
         }
       });
-
       this.props.setSocket(this.socket);
     };
 
@@ -102,6 +107,11 @@ class Chat extends Component {
         this.setState({
           showErrorMessage: true
         });
+        this.myInterval = setInterval(() => {
+          this.setState(prevState => ({
+            count: prevState.count - 1
+          }))
+        }, 1000);
         setTimeout(() => restartWebSocket(), this.state.count * 1000)
       }
     };
