@@ -13,6 +13,7 @@
     width: 100%;
     border: none;
     outline: #ba8f12;
+    display: block;
 }
 
 .join button {

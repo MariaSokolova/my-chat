@@ -1,5 +1,18 @@
 .error-message{
     text-align: center;
-    color: red;
+    padding: 0 1.6rem;
     font-size: 1.2rem;
 }
+
+.error {
+    color: #ff5a57;
+}
+
+.warning {
+    color: #ba8f12;
+}
+
+.info {
+    color: #70a955;
+}
+

@@ -17,19 +17,20 @@ class Chat extends Component {
       messages: this.messagesFormStorage || [],
       isOnline: false,
       windowIsActive: true,
-      showErrorMessage: false
+      showErrorMessage: false,
+      count: 20
     };
   }
 
   onFocus = () => {
-    this.setState( {
-        windowIsActive: true
+    this.setState({
+      windowIsActive: true
     })
   };
 
   onBlur = () => {
     this.setState({
-        windowIsActive: false
+      windowIsActive: false
     });
   };
 
@@ -91,7 +92,7 @@ class Chat extends Component {
       this.props.setSocket(this.socket);
     };
 
-    this.socket.onclose =  (event) => {
+    this.socket.onclose = (event) => {
       if (event.wasClean) {
         console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
       } else {
@@ -101,7 +102,7 @@ class Chat extends Component {
         this.setState({
           showErrorMessage: true
         });
-        setTimeout(() => restartWebSocket(), 20000)
+        setTimeout(() => restartWebSocket(), this.state.count * 1000)
       }
     };
     this.socket.onerror = function (error) {
@@ -140,9 +141,11 @@ class Chat extends Component {
         <Header/>
         <MessageList messages={this.state.messages}/>
         {showErrorMessage
-        ? <ErrorMessage />
-        : null}
-        <Input />
+          ? <ErrorMessage
+            message={`Please check your internet connection. Reconnection will start in a ${this.state.count} seconds`}
+            type={'error'}/>
+          : null}
+        <Input/>
       </div>
     )
   };
