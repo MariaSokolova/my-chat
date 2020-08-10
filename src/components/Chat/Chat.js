@@ -9,9 +9,9 @@ import {setSocket} from "../../redux/actions";
 
 import "./Chat.css"
 
-const restartInterval = 10;
-
 class Chat extends Component {
+  static restartInterval = 10;
+
   constructor(props) {
     super(props);
     this.messagesFormStorage = JSON.parse(localStorage.getItem('messages'));
@@ -20,7 +20,7 @@ class Chat extends Component {
       isOnline: false,
       windowIsActive: true,
       showErrorMessage: false,
-      count: restartInterval
+      count: Chat.restartInterval
     };
   }
 
@@ -60,7 +60,7 @@ class Chat extends Component {
       console.log('server restarted');
       clearInterval(this.myInterval);
       this.setState({
-        count: restartInterval
+        count: Chat.restartInterval
       })
     };
 
